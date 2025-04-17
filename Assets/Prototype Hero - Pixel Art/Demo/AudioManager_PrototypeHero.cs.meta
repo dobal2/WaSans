@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b6d92c3970d79864d87159fdea17a766
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 144765
+  packageName: Prototype Hero - Pixel Art
+  packageVersion: 1.3
+  assetPath: Assets/Prototype Hero - Pixel Art/Demo/AudioManager_PrototypeHero.cs
+  uploadId: 439597

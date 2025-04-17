@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2ab1420711a20c546a9282c763773d0a
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 144765
+  packageName: Prototype Hero - Pixel Art
+  packageVersion: 1.3
+  assetPath: Assets/Prototype Hero - Pixel Art/ColorSwap/Sprites-ColorSwap.shader
+  uploadId: 439597

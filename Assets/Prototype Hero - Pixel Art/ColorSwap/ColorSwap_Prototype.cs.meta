@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 43a59583c7fb26446989bdebbee022f3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 144765
+  packageName: Prototype Hero - Pixel Art
+  packageVersion: 1.3
+  assetPath: Assets/Prototype Hero - Pixel Art/ColorSwap/ColorSwap_Prototype.cs
+  uploadId: 439597
