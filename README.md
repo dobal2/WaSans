@@ -89,7 +89,6 @@ Stage 1 → Stage 2 → Stage 3 → Sans 보스전 → 클리어
 
 ### 디자인 패턴
 - Singleton — GameManager, AudioManager를 씬 간 상태 유지에 사용했습니다
-- Coroutine — 타이밍 및 상태 전환 관리에 활용했습니다
 
 ### 이펙트
 - 대시 잔상 (스프라이트 복제 + 알파 페이드)
