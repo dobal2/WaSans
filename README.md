@@ -89,7 +89,6 @@ Stage 1 → Stage 2 → Stage 3 → Sans 보스전 → 클리어
 
 ### 디자인 패턴
 - Singleton — GameManager, AudioManager를 씬 간 상태 유지에 사용했습니다
-- 상속 — Enemy 기반 클래스에서 적 유형을 확장했습니다
 - Coroutine — 타이밍 및 상태 전환 관리에 활용했습니다
 
 ### 이펙트
@@ -136,9 +135,3 @@ Assets/
 └── Audio/
 ```
 
----
-
-## 실행 방법
-
-1. Unity Hub에서 프로젝트를 열어주세요
-2. `Assets/Scenes/MainGame.unity` 씬을 열고 Play 버튼을 클릭하시면 됩니다
