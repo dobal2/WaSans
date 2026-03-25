@@ -4,7 +4,12 @@
       "Bash(git rm:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(find C:WaSansAssets -name *.scene -o -name *.unity)",
+      "Bash(find '/c/WaSans/Assets/Bandits - Pixel Art' -name *.cs)",
+      "Bash(grep:*)",
+      "Bash(ls C:/WaSans/LICENSE*)",
+      "Bash(git -C C:/WaSans log --format=%an)"
     ]
   }
 }
