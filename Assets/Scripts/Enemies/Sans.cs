@@ -350,34 +350,33 @@ public class Sans : MonoBehaviour
 
     public void ApplyDamage(float damage)
     {
-        if(dead)
+        if (dead)
             return;
-        if (dodgeCount<=0)
+        if (dodgeCount <= 0)
         {
             Instantiate(damageTextPrefab, transform.position, Quaternion.identity);
+            if (HitStop.Instance != null)
+                HitStop.Instance.Stop(0.12f);
             Die();
             return;
         }
+
         dodgeCount--;
-        Debug.Log("DodgeCount= "+dodgeCount);
+        Debug.Log("DodgeCount= " + dodgeCount);
         Instantiate(missTextPrefab, transform.position, Quaternion.identity);
+
         float direction = damage / Mathf.Abs(damage);
-        damage = Mathf.Abs(damage);
-        transform.Translate(new Vector2(-direction * 15, rigid.linearVelocity.y));
-        
-        //playerRigid.AddForce(new Vector2(direction * 900,playerRigid.linearVelocity.y),ForceMode2D.Impulse);
+
+        if (HitStop.Instance != null)
+            HitStop.Instance.Stop(0.08f);
+
+        // Translate 대신 Rigidbody2D 기반 넉백
+        rigid.linearVelocity = Vector2.zero;
+        rigid.AddForce(new Vector2(-direction * 800f, 300f), ForceMode2D.Force);
 
         if (Random.value <= 0.5f)
-        {
             StartCoroutine(ShootBonePattern());
-        }
         else
-        {
             StartCoroutine(ShootGasterBlasterPattern());
-        }
-        
-        
-        
-        
     }
 }

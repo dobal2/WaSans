@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour {
 	}
 
 	public void ApplyDamage(float damage) {
-		if (!isInvincible) 
+		if (!isInvincible)
 		{
 			Debug.Log("EnemyTakeDamage");
 			float direction = damage / Mathf.Abs(damage);
@@ -74,7 +74,11 @@ public class Enemy : MonoBehaviour {
 			transform.GetComponent<Animator>().SetBool("Hit", true);
 			life -= damage;
 			rb.linearVelocity = Vector2.zero;
-			rb.AddForce(new Vector2(direction * 500f, 100f));
+			rb.AddForce(new Vector2(direction * 500f, 200f));
+
+			if (HitStop.Instance != null)
+				HitStop.Instance.Stop(0.06f);
+
 			StartCoroutine(HitTime());
 		}
 	}

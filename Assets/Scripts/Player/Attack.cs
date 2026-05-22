@@ -84,6 +84,8 @@ public class Attack : MonoBehaviour
 				}
 				collidersEnemies[i].gameObject.SendMessage("ApplyDamage", dmgValue);
 				cam.GetComponent<CameraFollow>().ShakeCamera();
+				if (HitStop.Instance != null)
+					HitStop.Instance.Stop(0.06f);
 			}
 		}
 	}

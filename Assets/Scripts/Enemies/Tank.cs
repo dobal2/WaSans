@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class Tank : MonoBehaviour
@@ -11,15 +12,46 @@ public class Tank : MonoBehaviour
     private float shootTimer = 0f;
 
     public Transform playerTransform;
-    public float launchAngle = 70f; // 발사 각도 (도 단위)
+    public float launchAngle = 70f;
     public GameObject explosion;
 
-    private bool facingRight = false;
+    [Header("Movement")]
+    public float moveSpeed = 2f;
+    public float retreatDistance = 5f;
 
+    [Header("Wheels")]
+    public Transform wheelL;
+    public Transform wheelR;
+    public float wheelRotateSpeed = 200f;
+
+    [Header("Hit Flash")]
+    public float flashDuration = 0.05f;
+    public int flashCount = 4;
+
+    private bool facingRight = false;
+    private Rigidbody2D rb;
+    private SpriteRenderer[] spriteRenderers;
+    private Material[] originalMaterials;
+    private Material[] flashMaterials;
+    private bool isInvincible = false;
 
     private void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+
+        Shader flashShader = Shader.Find("Custom/FlashWhite");
+        originalMaterials = new Material[spriteRenderers.Length];
+        flashMaterials = new Material[spriteRenderers.Length];
+
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            originalMaterials[i] = spriteRenderers[i].material;
+
+            flashMaterials[i] = new Material(originalMaterials[i]);
+            flashMaterials[i].shader = flashShader;
+        }
     }
 
     void Update()
@@ -30,21 +62,30 @@ public class Tank : MonoBehaviour
             shootTimer = 0;
             FireProjectile();
         }
-        
-        if (playerTransform.position.x > transform.position.x)
+
+        float distX = playerTransform.position.x - transform.position.x;
+        float absDistX = Mathf.Abs(distX);
+
+        float moveDir = 0f;
+        if (absDistX < retreatDistance)
+            moveDir = -Mathf.Sign(distX);
+
+        rb.linearVelocity = new Vector2(moveDir * moveSpeed, rb.linearVelocity.y);
+
+        // 바퀴 회전 — 플립 시 localScale.x가 반전되므로 나눠서 보정
+        if (Mathf.Abs(rb.linearVelocity.x) > 0.01f && wheelL != null && wheelR != null)
         {
-            if (facingRight)
-            {
-                Flip();    
-            }
+            float worldDir = Mathf.Sign(rb.linearVelocity.x);
+            float scale = Mathf.Sign(transform.localScale.x);
+            float rotAmount = worldDir / scale * wheelRotateSpeed * Time.deltaTime;
+            wheelL.Rotate(0f, 0f, rotAmount);
+            wheelR.Rotate(0f, 0f, rotAmount);
         }
-        else if (playerTransform.position.x < transform.position.x)
-        {
-            if (!facingRight)
-            {
-                Flip();    
-            }
-        }
+
+        if (distX > 0 && facingRight)
+            Flip();
+        else if (distX < 0 && !facingRight)
+            Flip();
     }
     
     void Flip()
@@ -103,16 +144,48 @@ public class Tank : MonoBehaviour
     
     public void ApplyDamage(float damage)
     {
+        if (isInvincible) return;
+
         hp--;
+        if (HitStop.Instance != null)
+            HitStop.Instance.Stop(0.06f);
+
         if (hp <= 0)
         {
             Die();
+            return;
         }
-        
-        // if (!isInvincible)
-        // {
-        //     hp--;
-        //     StartCoroutine(HitTime());
-        // }
+
+        StartCoroutine(HitFlash());
+    }
+
+    IEnumerator HitFlash()
+    {
+        isInvincible = true;
+        for (int i = 0; i < flashCount; i++)
+        {
+            SetFlash(1f);
+            yield return new WaitForSecondsRealtime(flashDuration);
+            SetFlash(0f);
+            yield return new WaitForSecondsRealtime(flashDuration);
+        }
+        SetFlash(0f);
+        isInvincible = false;
+    }
+
+    void SetFlash(float amount)
+    {
+        for (int i = 0; i < spriteRenderers.Length; i++)
+        {
+            if (amount > 0f)
+            {
+                flashMaterials[i].SetFloat("_FlashAmount", amount);
+                spriteRenderers[i].material = flashMaterials[i];
+            }
+            else
+            {
+                spriteRenderers[i].material = originalMaterials[i];
+            }
+        }
     }
 }
