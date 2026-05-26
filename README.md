@@ -142,17 +142,5 @@ Assets/
 | Bandits - Pixel Art | 적 캐릭터 스프라이트 |
 | Pixel Art Tanks | Tank 적 스프라이트 |
 | Industrial City | 배경 타일맵 |
-| MetroidvaniaController | 캐릭터 컨트롤러 베이스 |
 | 19 Pixel Sprite effects | 이펙트 |
 | 25 Pixel Sprite effects | 이펙트 |
-| Pixel UI | UI 스프라이트 |
-| TextMesh Pro | 텍스트 렌더링 |
-| Minecraft Font | 게임 폰트 |
-
----
-
-## 라이선스
-
-이 프로젝트의 소스 코드는 [MIT License](./LICENSE)를 따릅니다.
-
-프로젝트에 포함된 서드파티 에셋(스프라이트, 사운드, 폰트, 플러그인 등)은 각 에셋의 원래 라이선스를 따릅니다.
