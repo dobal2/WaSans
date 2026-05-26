@@ -5,7 +5,7 @@
 
 ## 플레이 영상
 
-[![WaSans 플레이 영상](https://img.youtube.com/vi/XL9qDXp5k9s/0.jpg)](https://www.youtube.com/watch?v=XL9qDXp5k9s)
+[![WaSans 플레이 영상]([https://img.youtube.com/vi/XL9qDXp5k9s/0.jpg)](https://www.youtube.com/watch?v=XL9qDXp5k9s](https://youtu.be/uNmG5V911ko))
 
 ---
 
